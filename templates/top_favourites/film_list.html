@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TOP 300 Filmů</title>
+</head>
+<style>
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
+.grid-child {
+    border: solid gray 1px;
+}
+.centered {
+    margin: auto;
+}
+.full-wide {
+    display: block;
+    width: 500px;
+    margin: auto;
+}
+</style>
+<body>
+
+<form class="centered" method="get">
+    <input class="full-wide" type="text" name="query" placeholder="input..." value="{{ query }}">
+    <input type="submit" style="display: none;">
+</form>
+
+{% if query != "" %}
+    <div class="grid-container">
+
+        <ul class="grid-child">
+            <h2>Filmy</h2>
+            {% for object in object_list %}
+                <li><a href="/films/{{ object.pk }}/">{{ object.name }}</a></li>
+            {% endfor %}
+        </ul>
+
+        <ul class="grid-child">
+            <h2>Herci</h2>
+            {% for actor in actors %}
+                <li><a href="/actors/{{ actor.pk }}/">{{ actor.name }}</a></li>
+            {% endfor %}
+        </ul>
+
+    </div>
+{% endif %}
+
+</body>
+</html>

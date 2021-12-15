@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{  object.name }}</title>
+</head>
+<body>
+
+<h1>{{ object.name }}</h1>
+
+<ul>
+{% for film in films %}
+    <li><a href="/films/{{ film.pk }}/">{{ film.name }}</a></li>
+{% endfor %}
+</ul>
+
+</body>
+</html>
