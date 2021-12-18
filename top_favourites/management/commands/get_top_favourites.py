@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand
 from top_favourites import get_films, get_actors
 from top_favourites.models import Film, Actor
+from time import sleep
 
 
 class Command(BaseCommand):
@@ -31,6 +32,5 @@ class Command(BaseCommand):
                 if craeted:
                     f.actors.add(a)
                     a.save()
-
             f.save()
 

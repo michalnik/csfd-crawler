@@ -66,9 +66,10 @@ def __get_div_with_actors(href: str) -> object:
 
 
 def __get_actors_links(div_creator: object) -> Iterator[object]:
-    for link in div_creator.findAll("a"):
-        if link.get("href", "").startswith("/tvurce/"):
-            yield link
+    if div_creator:
+        for link in div_creator.findAll("a"):
+            if link.get("href", "").startswith("/tvurce/"):
+                yield link
 
 
 def __get_actor(link: object) -> tuple:
