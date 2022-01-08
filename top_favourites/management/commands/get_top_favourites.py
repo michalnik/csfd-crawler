@@ -30,7 +30,3 @@ class Command(BaseCommand):
                 )
                 if craeted:
                     f.actors.add(a)
-                    a.save()
-
-            f.save()
-
