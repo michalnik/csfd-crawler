@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-#u3-0r=m-@(c73(cezy+_(6otrj3qeody5v*8oayu@gxml3j9^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
 
 # Application definition
@@ -33,21 +33,21 @@ ALLOWED_HOSTS = ["localhost"]
 INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
-    #'django.contrib.sessions',
-    #'django.contrib.messages',
-    'django.contrib.postgres',
-    #'django.contrib.staticfiles',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'django.contrib.admin',
     'top_favourites'
 ]
 
 MIDDLEWARE = [
-    #'django.middleware.security.SecurityMiddleware',
-    #'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    #'django.middleware.csrf.CsrfViewMiddleware',
-    #'django.contrib.auth.middleware.AuthenticationMiddleware',
-    #'django.contrib.messages.middleware.MessageMiddleware',
-    #'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 ROOT_URLCONF = 'csfd.urls'
@@ -75,13 +75,17 @@ WSGI_APPLICATION = 'csfd.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'csfd',
+    #     'USER': 'csfd',
+    #     'PASSWORD': 'csfd',
+    #     'HOST': 'localhost',
+    #     'PORT': '5432',
+    # },
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'csfd',
-        'USER': 'csfd',
-        'PASSWORD': 'csfd',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'csfd.sqlite3',
     }
 }
 
@@ -120,7 +124,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -138,3 +142,23 @@ CSFD_BASE_HEADERS = {
                "image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9")
 }
 CSFD_EXTERNAL_ID_REGEX = r"[0-9]{1,}"
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'DEBUG',
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'WARNING',
+        },
+    }
+}

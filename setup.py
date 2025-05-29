@@ -7,15 +7,14 @@ setup(
     description="CSFD Top favourites",
     author="Michal Mladek",
     author_email="michal.mladek.78@gmail.com",
-    # TODO: url="",
+    python_requires='==3.9.*',
     install_requires=[
-        "django",
-        "psycopg2-binary",
+        "django~=2.2",
         "requests",
         "beautifulsoup4"
     ],
     extras_require={
-        "devel": [
+        "dev": [
             "ipython",
             "mock"
         ]

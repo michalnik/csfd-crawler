@@ -1,5 +1,5 @@
 from django.views.generic import ListView, DetailView
-
+from top_favourites import normalize
 from top_favourites.models import Film, Actor
 
 
@@ -27,14 +27,19 @@ class FilmListView(ListView):
 
     def get_queryset(self):
         if query := self.request.GET.get("query", ""):
-            return Film.objects.filter(name__unaccent__icontains=query)
+            if query == "*":
+                return Film.objects.all()[:300]
+            return Film.objects.filter(name_normalized__contains=normalize(query))
         else:
             return Film.objects.none()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         if query := self.request.GET.get("query", ""):
-            context["actors"] = Actor.objects.filter(name__unaccent__icontains=query)
+            if query == "*":
+                context["actors"] = Actor.objects.all()[:300]
+            else:
+                context["actors"] = Actor.objects.filter(name_normalized__contains=normalize(query))
         else:
             context["actors"] = Actor.objects.none()
         context["query"] = query

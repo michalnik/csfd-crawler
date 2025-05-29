@@ -10,46 +10,45 @@ The data used in this application was obtained from the publicly accessible webs
 
 ## starting the project
 
-### 1. run the database for development purpose
+### 1. clone source, create virtual environment and install packages
 
 ```bash
-make db-run
+git clone git@github.com:michalnik/csfd-crawler.git
+cd csfd-crawler
+python3.9 -m venv .venv
+source .venv/bin/activate
+python3.9 -m pip install -e .
 ```
 
-### 2. initialize database for development purpose (while database is running)
+### 2. initialize database
 
 ```bash
-make db-init
+cd csfd_crawler
+python manage.py migrate
 ```
 
-### 3. import database with data
+### 3. download and store TOP 300 movies with their actors
 
 ```bash
-make db-import
+# default is 1 hundred
+python manage.py get_top_favourites --hundreds 3
 ```
 
 ### 4. run development server to enable access GUI on localhost:8000
 
 ```bash
-make run
+python manage.py runserver
 ```
 
-## other commands
-
-### run Django migrations
-
-```bash
-make db-migrate
-```
-
-### management command to fill database with Restaurants and Actors
-
-```bash
-make manage cli="get_top_favourites"
-```
-
-### clear installation
-
-```bash
-make clear
-```
+## 5. run browser and search
+### click on the provided link from [previous command](http://localhost:8000)
+You will see and input box ...
+### just push enter key
+You will see the same result
+### fill * into input box and push enter key again
+You will see all scraped movies and actors (max 300 entries)
+### fill search text into input box and push enter key again
+You will see matched movies and actors
+### browse the results with clicks
+- detail actor
+- detail film
