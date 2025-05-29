@@ -13,7 +13,7 @@ The data used in this application was obtained from the publicly accessible webs
 ### 1. clone source, create virtual environment and install packages
 
 ```bash
-git clone git@github.com:michalnik/csfd-crawler.git
+git clone -b dev git@github.com:michalnik/csfd-crawler.git
 cd csfd-crawler
 python3.9 -m venv .venv
 source .venv/bin/activate
